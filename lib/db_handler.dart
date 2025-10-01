@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class DatabaseHelper {
@@ -12,8 +11,18 @@ class DatabaseHelper {
   static Box<Map> get _box => Hive.box<Map>(_boxName);
 
   // Create
-  static Future<void> insertItem(String name, int qty, String location) async {
-    await _box.add({'name': name, 'quantity': qty, 'location': location});
+  static Future<void> insertItem(
+    String name,
+    int qty,
+    String location,
+    String category,
+  ) async {
+    await _box.add({
+      'name': name,
+      'quantity': qty,
+      'location': location,
+      'category': category,
+    });
   }
 
   // Read
@@ -27,11 +36,13 @@ class DatabaseHelper {
     String name,
     int qty,
     String location,
+    String category,
   ) async {
     await _box.putAt(index, {
       'name': name,
       'quantity': qty,
       'location': location,
+      'category': category,
     });
   }
 
